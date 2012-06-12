@@ -8,7 +8,7 @@
 @import "application/pygment_trac";
 
 .view.social {
-  text-align: center;
+  text-align: left;
   a {
     @include inline-block;
     padding-left: 22px;
