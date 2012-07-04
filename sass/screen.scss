@@ -7,6 +7,19 @@
 @import "application/layout";
 @import "application/pygment_trac";
 
+h3.abstract {
+  color: #666;
+  letter-spacing: 1px;
+  font-size: 1.05em;
+  margin: 5px 0;
+  font-weight: normal;
+  font-style: italic;
+  strong {
+    font-weight: normal;   
+    color: #069;
+  }
+}
+
 .view.social {
   text-align: left;
   a {
@@ -22,5 +35,13 @@
     &.github {
       background: transparent url('../images/icon-github.png') 0% 50% no-repeat;
     }
+  }
+}
+
+p {
+  strong {
+    font-weight: normal;
+    font-style: italic;
+    color: #069;
   }
 }
