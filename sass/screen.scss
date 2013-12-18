@@ -25,16 +25,40 @@ h2 {
   }
 }
 
-h3.abstract {
-  color: #666;
+h2.abstract {
+  color: #444;
   letter-spacing: 1px;
-  font-size: 1.05em;
-  margin: 5px 0;
+  font-size: 1.15em;
+  line-height: 1.2em;
+  margin: 20px 0;
   font-weight: normal;
   font-style: italic;
   strong {
     font-weight: normal;
     color: #069;
+  }
+}
+
+
+h3.abstract {
+  color: #444;
+  letter-spacing: 1px;
+  font-size: 1em;
+  line-height: 1.2em;
+  margin: 20px 0;
+  font-weight: normal;
+  font-style: italic;
+  strong {
+    font-weight: bold;
+    color: #494949;
+    line-height: 1.2em;
+  }
+  em {
+    @include inline-block;
+    font-size: 1.1em;
+    line-height: 1.2em;
+    color: #494949;
+    border-bottom: 1px dashed #999;
   }
 }
 
