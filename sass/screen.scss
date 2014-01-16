@@ -6,6 +6,7 @@
 @import "compass/css3";
 @import "application/layout";
 @import "application/pygment_trac";
+@import "compass/utilities/general/clearfix";
 
 h2 {
   small {
@@ -81,19 +82,32 @@ h3.abstract {
   }
 }
 
-p {
-  strong {
-    font-weight: normal;
-    font-style: italic;
-    color: #069;
-  }
-}
-
 .description {
   margin: 5px 0 20px 0;
   padding: 0 0 20px 0;
   border-bottom: 1px dotted #eee;
+  strong {
+    color: #777;
+  }
   p {
     margin: 10px 0 0 0;
   }
+  &.last {
+    margin-bottom: 0;
+    border-bottom: 0;
+    padding-bottom: 10px;
+  }
+  ul {
+    padding-left: 20px;
+  }
 }
+
+.row {
+  @include clearfix;
+  .half-col {
+    float: left;
+    width: 50%;
+    margin-right: 0;
+  }
+}
+
