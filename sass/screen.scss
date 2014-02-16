@@ -55,9 +55,9 @@ h3.abstract {
     line-height: 1.2em;
   }
   em {
-    @include inline-block;
-    font-size: 1.1em;
-    line-height: 1.2em;
+    // @include inline-block;
+    // font-size: 1.1em;
+    // line-height: 1.2em;
     color: #494949;
     border-bottom: 1px dashed #999;
   }
