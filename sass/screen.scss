@@ -1,8 +1,3 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
 @import "compass/css3";
 @import "application/layout";
 @import "application/pygment_trac";
@@ -16,7 +11,7 @@ h2 {
 
 #avatar {
   padding: 8px;
-  @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  @include box-shadow(0 0px 2px rgba(0, 0, 0, 0.15));
   border: 1px solid #eee;
   margin-bottom: 30px;
   max-width: 254px;
@@ -87,7 +82,7 @@ h3.abstract {
   padding: 0 0 20px 0;
   border-bottom: 1px dotted #eee;
   strong {
-    color: #777;
+    color: #333;
   }
   p {
     margin: 10px 0 0 0;
@@ -99,6 +94,20 @@ h3.abstract {
   }
   ul {
     padding-left: 20px;
+  }
+  &.skill, &.personal-detail, &.language, &.education {
+    padding-bottom: 5px;
+    border-bottom: 0;
+    margin: 5px 0 10px 0;
+    h3 {
+      margin-bottom: 5px;
+    }
+    p {
+      margin-top: 0;
+    }
+    &.last {
+      padding-bottom: 15px;
+    }
   }
 }
 
