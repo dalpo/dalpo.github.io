@@ -1,11 +1,11 @@
 ---
 layout: post
 
-title: 'How to create a custom section for RailsAdmin Engine'
-subtitle: 'Welcome to my blog!'
-cover_image: blog-cover.jpg
+title: 'How to create a custom section for the RailsAdmin Engine'
+subtitle: 'In RailsAdmin a section is a configuration DSL for a custom action'
+cover_image: ra-section-cover.jpg
 
-excerpt: "How to create a custom section in RailsAdmin for a reusable custom action"
+excerpt: "How to create a custom section to configure your reusable Rails Admin custom action"
 
 author:
   name: Andrea Dal Ponte
