@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>http://andreadalponte.com</link>
+    <atom:link href="http://andreadalponte.com/feed.xml" rel="self" type="application/rss+xml" />
+    <description></description>
+    <language>en-us</language>
+    <pubDate>Wed, 10 Sep 2014 20:33:16 +0000</pubDate>
+    <lastBuildDate>Wed, 10 Sep 2014 20:33:16 +0000</lastBuildDate>
+
+    
+
+  <item>
+    <title>How to create a custom section for RailsAdmin Engine</title>
+    <link>http://andreadalponte.com/2014/09/10/how-to-create-custom-section-in-rails-admin/</link>
+    <pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate>
+    <author></author>
+    <guid>http://andreadalponte.com/2014/09/10/how-to-create-custom-section-in-rails-admin</guid>
+    <description>&lt;p&gt;Sections describe different views in the RailsAdmin engine. Theese are very useful if you are writing a reusable custom action.&lt;/p&gt;
+
+&lt;p&gt;Each section’s class object can store generic configuration about that section (such as the number of visible tabs in the main navigation), while the instances (accessed via model configuration objects) store model specific configuration (such as the visibility of the model).&lt;/p&gt;
+
+&lt;p&gt;With the following lines you could easily write CustomAction configuration (aka Section):&lt;/p&gt;
+
+&lt;pre class=&quot;ruby&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;
+require &amp;#39;rails_admin/config/sections/base&amp;#39;
+
+module RailsAdmin
+  module Config
+    module Sections
+      # Configuration of the clone action
+      class SampleSection &amp;lt; RailsAdmin::Config::Sections::Base
+
+        register_instance_option :sample_conf do
+          nil # set a default value here
+        end
+
+        register_instance_option :another_sample_conf do
+          nil # set a default value here
+        end
+
+      end
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So you can specify customize configurations in the rails_admin configuration initializer:&lt;/p&gt;
+
+&lt;pre class=&quot;Ruby&quot;&gt;&lt;code class=&quot;Ruby&quot;&gt;
+RailsAdmin.config do |config|
+  config.model &amp;#39;Team&amp;#39; do
+    sample_section do
+      custom_method :some_value
+
+      another_sample_conf do
+        bindings[:object].do_something!
+      end
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Every value of your Section could be retrieved with the model_config object in your custom action. For instance:&lt;/p&gt;
+
+&lt;pre class=&quot;ruby&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;
+require &amp;#39;rails_admin/config/actions&amp;#39;
+require &amp;#39;rails_admin/config/actions/base&amp;#39;
+
+module RailsAdmin
+  module Config
+    module Actions
+      class SampleCustomAction &amp;lt; Base
+        RailsAdmin::Config::Actions.register(self)
+
+        register_instance_option :controller do
+          Proc.new do
+            # retrieve configuration:
+            model_config.sample_section.sample_conf
+            model_config.sample_section.another_sample_conf
+
+           # do something...
+
+            respond_to do |format|
+              format.html { render @action.template_name }
+              format.js   { render @action.template_name, :layout =&amp;gt; false }
+            end
+
+          end
+        end
+      end
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Important note:&lt;/p&gt;
+
+&lt;p&gt;When you define a custom section this must be initialized before rails_admin to work correctly. So in your Gemfile you must define rails_admin after your custom action gem.&lt;/p&gt;
+
+&lt;pre class=&quot;Ruby&quot;&gt;&lt;code class=&quot;Ruby&quot;&gt;
+gem &amp;#39;rails_admin_custom_action&amp;#39;
+gem &amp;#39;rails_admin&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;</description>
+  </item>
+
+
+
+  <item>
+    <title>My first blog post on Jekyll!</title>
+    <link>http://andreadalponte.com/2014/08/01/my-blog-on-jekyll/</link>
+    <pubDate>Fri, 01 Aug 2014 00:00:00 +0000</pubDate>
+    <author></author>
+    <guid>http://andreadalponte.com/2014/08/01/my-blog-on-jekyll</guid>
+    <description>&lt;h5 id=&quot;tldr&quot;&gt;TL;DR&lt;/h5&gt;
+
+&lt;p&gt;Welcome to my blog!&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Welcome to my WebLog!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I choose Jekyll as blogging platform and this is my first post! :)&lt;/p&gt;</description>
+  </item>
+
+
+
+
+  </channel>
+</rss>
