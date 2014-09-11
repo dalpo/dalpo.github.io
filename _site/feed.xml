@@ -6,8 +6,8 @@
     <atom:link href="http://andreadalponte.com/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Wed, 10 Sep 2014 21:39:35 +0000</pubDate>
-    <lastBuildDate>Wed, 10 Sep 2014 21:39:35 +0000</lastBuildDate>
+    <pubDate>Thu, 11 Sep 2014 07:32:26 +0000</pubDate>
+    <lastBuildDate>Thu, 11 Sep 2014 07:32:26 +0000</lastBuildDate>
 
     
 
@@ -22,87 +22,73 @@
 &lt;p&gt;Each section’s class object can store generic configuration about that section (such as the number of visible tabs in the main navigation), while the instances (accessed via model configuration objects) store model specific configuration (such as the visibility of the model).&lt;/p&gt;
 
 &lt;p&gt;With the following lines you could easily write CustomAction configuration (aka Section):&lt;/p&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-ruby&#39; data-lang=&#39;ruby&#39;&gt;&lt;span class=&#39;nb&#39;&gt;require&lt;/span&gt; &lt;span class=&#39;s1&#39;&gt;&amp;#39;rails_admin/config/sections/base&amp;#39;&lt;/span&gt;
 
-&lt;pre class=&quot;ruby&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;
-require &amp;#39;rails_admin/config/sections/base&amp;#39;
 
-module RailsAdmin
-  module Config
-    module Sections
-      # Configuration of the clone action
-      class SampleSection &amp;lt; RailsAdmin::Config::Sections::Base
+&lt;span class=&#39;k&#39;&gt;module&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;RailsAdmin&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;module&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;Config&lt;/span&gt;
+    &lt;span class=&#39;k&#39;&gt;module&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;Sections&lt;/span&gt;
+      &lt;span class=&#39;c1&#39;&gt;# Configuration of the clone action&lt;/span&gt;
+      &lt;span class=&#39;k&#39;&gt;class&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;SampleSection&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#39;no&#39;&gt;RailsAdmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;no&#39;&gt;Config&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;no&#39;&gt;Sections&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;no&#39;&gt;Base&lt;/span&gt;
 
-        register_instance_option :sample_conf do
-          nil # set a default value here
-        end
+        &lt;span class=&#39;n&#39;&gt;register_instance_option&lt;/span&gt; &lt;span class=&#39;ss&#39;&gt;:sample_conf&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+          &lt;span class=&#39;kp&#39;&gt;nil&lt;/span&gt; &lt;span class=&#39;c1&#39;&gt;# set a default value here&lt;/span&gt;
+        &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
 
-        register_instance_option :another_sample_conf do
-          nil # set a default value here
-        end
+        &lt;span class=&#39;n&#39;&gt;register_instance_option&lt;/span&gt; &lt;span class=&#39;ss&#39;&gt;:another_sample_conf&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+          &lt;span class=&#39;kp&#39;&gt;nil&lt;/span&gt; &lt;span class=&#39;c1&#39;&gt;# set a default value here&lt;/span&gt;
+        &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
 
-      end
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
+      &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+    &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+&lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;So you can specify customize configurations in the rails_admin configuration initializer:&lt;/p&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-ruby&#39; data-lang=&#39;ruby&#39;&gt;&lt;span class=&#39;no&#39;&gt;RailsAdmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;config&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;|&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;config&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;|&lt;/span&gt;
+  &lt;span class=&#39;n&#39;&gt;config&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;model&lt;/span&gt; &lt;span class=&#39;s1&#39;&gt;&amp;#39;Team&amp;#39;&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+    &lt;span class=&#39;n&#39;&gt;sample_section&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+      &lt;span class=&#39;n&#39;&gt;custom_method&lt;/span&gt; &lt;span class=&#39;ss&#39;&gt;:some_value&lt;/span&gt;
 
-&lt;pre class=&quot;Ruby&quot;&gt;&lt;code class=&quot;Ruby&quot;&gt;
-RailsAdmin.config do |config|
-  config.model &amp;#39;Team&amp;#39; do
-    sample_section do
-      custom_method :some_value
-
-      another_sample_conf do
-        bindings[:object].do_something!
-      end
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
+      &lt;span class=&#39;n&#39;&gt;another_sample_conf&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+        &lt;span class=&#39;n&#39;&gt;bindings&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;[&lt;/span&gt;&lt;span class=&#39;ss&#39;&gt;:object&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;].&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;do_something!&lt;/span&gt;
+      &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+    &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+&lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Every value of your Section could be retrieved with the model_config object in your custom action. For instance:&lt;/p&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-ruby&#39; data-lang=&#39;ruby&#39;&gt;&lt;span class=&#39;nb&#39;&gt;require&lt;/span&gt; &lt;span class=&#39;s1&#39;&gt;&amp;#39;rails_admin/config/actions&amp;#39;&lt;/span&gt;
+&lt;span class=&#39;nb&#39;&gt;require&lt;/span&gt; &lt;span class=&#39;s1&#39;&gt;&amp;#39;rails_admin/config/actions/base&amp;#39;&lt;/span&gt;
 
-&lt;pre class=&quot;ruby&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;
-require &amp;#39;rails_admin/config/actions&amp;#39;
-require &amp;#39;rails_admin/config/actions/base&amp;#39;
+&lt;span class=&#39;k&#39;&gt;module&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;RailsAdmin&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;module&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;Config&lt;/span&gt;
+    &lt;span class=&#39;k&#39;&gt;module&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;Actions&lt;/span&gt;
+      &lt;span class=&#39;k&#39;&gt;class&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;SampleCustomAction&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#39;no&#39;&gt;Base&lt;/span&gt;
+        &lt;span class=&#39;no&#39;&gt;RailsAdmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;no&#39;&gt;Config&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;no&#39;&gt;Actions&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;register&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nb&#39;&gt;self&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
 
-module RailsAdmin
-  module Config
-    module Actions
-      class SampleCustomAction &amp;lt; Base
-        RailsAdmin::Config::Actions.register(self)
+        &lt;span class=&#39;n&#39;&gt;register_instance_option&lt;/span&gt; &lt;span class=&#39;ss&#39;&gt;:controller&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+          &lt;span class=&#39;no&#39;&gt;Proc&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;new&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt;
+            &lt;span class=&#39;c1&#39;&gt;# retrieve configuration:&lt;/span&gt;
+            &lt;span class=&#39;n&#39;&gt;model_config&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;sample_section&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;sample_conf&lt;/span&gt;
+            &lt;span class=&#39;n&#39;&gt;model_config&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;sample_section&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;another_sample_conf&lt;/span&gt;
 
-        register_instance_option :controller do
-          Proc.new do
-            # retrieve configuration:
-            model_config.sample_section.sample_conf
-            model_config.sample_section.another_sample_conf
+           &lt;span class=&#39;c1&#39;&gt;# do something...&lt;/span&gt;
 
-           # do something...
+            &lt;span class=&#39;n&#39;&gt;respond_to&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;do&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;|&lt;/span&gt;&lt;span class=&#39;nb&#39;&gt;format&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;|&lt;/span&gt;
+              &lt;span class=&#39;nb&#39;&gt;format&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;html&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;{&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;render&lt;/span&gt; &lt;span class=&#39;vi&#39;&gt;@action&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;template_name&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;}&lt;/span&gt;
+              &lt;span class=&#39;nb&#39;&gt;format&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;js&lt;/span&gt;   &lt;span class=&#39;p&#39;&gt;{&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;render&lt;/span&gt; &lt;span class=&#39;vi&#39;&gt;@action&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;template_name&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;ss&#39;&gt;:layout&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#39;kp&#39;&gt;false&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;}&lt;/span&gt;
+            &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
 
-            respond_to do |format|
-              format.html { render @action.template_name }
-              format.js   { render @action.template_name, :layout =&amp;gt; false }
-            end
-
-          end
-        end
-      end
-    end
-  end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
+          &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+        &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+      &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+    &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;
+&lt;span class=&#39;k&#39;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Important note:&lt;/p&gt;
 
 &lt;p&gt;When you define a custom section this must be initialized before rails_admin to work correctly. So in your Gemfile you must define rails_admin after your custom action gem.&lt;/p&gt;
-
-&lt;pre class=&quot;Ruby&quot;&gt;&lt;code class=&quot;Ruby&quot;&gt;
-gem &amp;#39;rails_admin_custom_action&amp;#39;
-gem &amp;#39;rails_admin&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-ruby&#39; data-lang=&#39;ruby&#39;&gt;&lt;span class=&#39;n&#39;&gt;gem&lt;/span&gt; &lt;span class=&#39;s1&#39;&gt;&amp;#39;rails_admin_custom_action&amp;#39;&lt;/span&gt;
+&lt;span class=&#39;n&#39;&gt;gem&lt;/span&gt; &lt;span class=&#39;s1&#39;&gt;&amp;#39;rails_admin&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
   </item>
 
 

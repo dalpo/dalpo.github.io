@@ -22,8 +22,9 @@ Each section's class object can store generic configuration about that section (
 
 With the following lines you could easily write CustomAction configuration (aka Section):
 
-```ruby
+{% highlight ruby %}
 require 'rails_admin/config/sections/base'
+
 
 module RailsAdmin
   module Config
@@ -43,11 +44,11 @@ module RailsAdmin
     end
   end
 end
-```
+{% endhighlight %}
 
 So you can specify customize configurations in the rails_admin configuration initializer:
 
-```Ruby
+{% highlight ruby %}
 RailsAdmin.config do |config|
   config.model 'Team' do
     sample_section do
@@ -59,11 +60,11 @@ RailsAdmin.config do |config|
     end
   end
 end
-```
+{% endhighlight %}
 
 Every value of your Section could be retrieved with the model_config object in your custom action. For instance:
 
-```ruby
+{% highlight ruby %}
 require 'rails_admin/config/actions'
 require 'rails_admin/config/actions/base'
 
@@ -92,14 +93,14 @@ module RailsAdmin
     end
   end
 end
-```
+{% endhighlight %}
 
 Important note:
 
 When you define a custom section this must be initialized before rails_admin to work correctly. So in your Gemfile you must define rails_admin after your custom action gem.
 
-```Ruby
+{% highlight ruby %}
 gem 'rails_admin_custom_action'
 gem 'rails_admin'
-```
+{% endhighlight %}
 
