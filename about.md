@@ -11,10 +11,10 @@ excerpt: "I'm Andrea Dal Ponte a full stack web developer specialized in Ruby on
 
 I'm a **full stack web developer** based in **Vicenza** (Italy) with a deep love for **open source** software development. Passionate about finding simple and elegant solutions to important problems with **Ruby on Rails** and **EmberJS**.
 
-I believe in simplicity and I strive for tested clean code, through **Test Drive Development**, followind the best practice and patterns like the [Sandi Metz' Rules For Developers](http://robots.thoughtbot.com/sandi-metz-rules-for-developers).
+I believe in simplicity and I strive for tested clean code, through **Test Drive Development**, following the best practice and patterns like the [Sandi Metz' Rules For Developers](http://robots.thoughtbot.com/sandi-metz-rules-for-developers).
 
-In my free time I love to learn about new technologies and collaborate with open source communities to build awesome software.
-Sometimes... when I don't code, I like to listen good music, going trekking, travel around the world and play my bass guitar.
+In my spare time I love learning new technologies and collaborating with open source communities to build awesome software.
+Sometimes... when I don't code, I like listening good music, going trekking, travelling around the world and playing my bass guitar.
 
 ---
 
