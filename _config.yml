@@ -1,7 +1,7 @@
 inc:
   # Blog Information
   title:        "Andrea Dal Ponte"
-  subtitle:     "Full stack developer specialized in Ruby on Rails and EmberJS"
+  subtitle:     "Full stack web developer specialized in Ruby on Rails and EmberJS"
   cover_image:  blog-cover.jpg
   logo:         logo.png
 
@@ -56,7 +56,6 @@ timezone:    nil
 future:      false
 show_drafts: nil
 limit_posts: 0
-pygments:    true
 
 relative_permalinks: true
 

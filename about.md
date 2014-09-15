@@ -5,7 +5,14 @@ title: "Hi, I'm Andrea Dal Ponte"
 subtitle: "...and I'm a full stack web developer specialized in Ruby on Rails and EmberJS"
 cover_image: bassano-cover.jpg
 
-excerpt: "I'm Andrea Dal Ponte a full stack web developer specialized in Ruby on Rails and EmberJS"
+excerpt: "I’m a full stack web developer based in Vicenza (Italy) with a deep love for open source software development. Passionate about finding simple and elegant solutions to important problems with Ruby on Rails and EmberJS"
+
+author:
+  name: Andrea Dal Ponte
+  twitter: dalpo
+  gplus: 100687498195339762535
+  bio: Full stack web developer
+  image: avatar.png
 ---
 
 
