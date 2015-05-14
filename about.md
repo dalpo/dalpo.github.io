@@ -29,20 +29,20 @@ Sometimes... when I don't code, I like listening good music, going trekking, tra
 
 I'm in love with: **Ruby on Rails**, Sinatra, Git, JavaScript, **CoffeeScript**, HTML5, **EmberJS**, ReactJS, Redis, **PostgreSQL**, MySQL, **Test Driven Development** with libraries such as **Cucumber** and **RSpec**, Lean/Agile Software Development and Multitenant applications.
 
-But I also worked with **PHP** using many frameworks such as **CakePHP** and CodeIgniter, Node.js, **MongoDB**, AngularJS, Objective-C, ASP, **SpreeCommerce** and more.
+But I also worked with **PHP** using many frameworks such as **CakePHP** and CodeIgniter, **MongoDB**, AngularJS, Objective-C, ASP, **SpreeCommerce** and more.
 
 ---
 
 ### \_Technical skills
 
 #### **Server side development**
-Ruby on Rails, Sinatra, CakePHP, Code Igniter, Node.js
+Ruby on Rails, Sinatra, CakePHP, Code Igniter
 
 #### **Client side development**
 EmberJS, ReactJS, AngularJS, Handlebar, Emblem, jQuery
 
 #### **Database**
-PostgreSQL, MySQL, MongoDB, Redis
+PostgreSQL, Redis, MySQL, MongoDB
 
 #### **Frontend**
 HTML5, CSS3, JavaScript, CoffeeScript, Sass, Haml, Less, Bootstrap, Foundation
@@ -57,8 +57,13 @@ GNU/Linux Servers (usually Debian based), Chef, NGINX, Apache, Unicorn, Puma, Pa
 
 ### \_Work experience
 
+#### Full stack web developer
+##### **[PitchTarget - H-Farm](http://www.pitchtarget.com)** – January 2015 to Present
+
+Ember.js and Ruby on Rails developer
+
 #### Software Craftsmanship
-##### **[Develon S.r.l.](http://www.develon.com)** – April 2012 to Present
+##### **[Develon S.r.l.](http://www.develon.com)** – April 2012 to December 2014
 
 Full stack web developer handle all aspects the web applications creation process. Ruby On Rails, HTML5, CSS3, jQuery, Responsive and Mobile web applications develop.
 

@@ -4,7 +4,7 @@ gem 'github-pages'
 
 gem 'rake'
 
-gem 'jekyll'
+gem 'jekyll', '~> 2.3'
 gem 'jekyll-assets'
 
 gem 'maruku'
