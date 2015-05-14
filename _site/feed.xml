@@ -6,10 +6,164 @@
     <atom:link href="http://andreadalponte.com/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Thu, 14 May 2015 10:45:29 +0000</pubDate>
-    <lastBuildDate>Thu, 14 May 2015 10:45:29 +0000</lastBuildDate>
+    <pubDate>Thu, 14 May 2015 11:18:55 +0000</pubDate>
+    <lastBuildDate>Thu, 14 May 2015 11:18:55 +0000</lastBuildDate>
 
     
+
+  <item>
+    <title>How to integrate VideoJS into jQuery Blueimp Gallery</title>
+    <link>http://andreadalponte.com/2015/05/14/how-to-integrate-videojs-into-jquery-blueimp-gallery/</link>
+    <pubDate>Thu, 14 May 2015 00:00:00 +0000</pubDate>
+    <author></author>
+    <guid>http://andreadalponte.com/2015/05/14/how-to-integrate-videojs-into-jquery-blueimp-gallery</guid>
+    <description>&lt;p&gt;Blueimp Gallery is a touch-enabled, responsive and customizable image &amp;amp; video gallery, carousel and lightbox, optimized for both mobile and desktop web browsers. It enable nativaly the support for Youtube, Vimeo and HTML5 video support.&lt;/p&gt;
+
+&lt;p&gt;You could extend the support to the HTML5 player VideoJS with this simply factory.&lt;/p&gt;
+
+&lt;h5 id=&quot;javascripts&quot;&gt;Javascripts:&lt;/h5&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-coffeescript&#39; data-lang=&#39;coffeescript&#39;&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nf&#39;&gt;(factory) -&amp;gt;&lt;/span&gt;
+  &lt;span class=&#39;s&#39;&gt;&amp;quot;use strict&amp;quot;&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;if&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;typeof&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;define&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;is&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;function&amp;quot;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;and&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;define&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;amd&lt;/span&gt;
+
+    &lt;span class=&#39;c1&#39;&gt;# Register as an anonymous AMD module:&lt;/span&gt;
+    &lt;span class=&#39;nx&#39;&gt;define&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;[&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;./blueimp-helper&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;./blueimp-gallery&amp;quot;&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;],&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;factory&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;else&lt;/span&gt;
+
+    &lt;span class=&#39;c1&#39;&gt;# Browser globals:&lt;/span&gt;
+    &lt;span class=&#39;nx&#39;&gt;factory&lt;/span&gt; &lt;span class=&#39;nb&#39;&gt;window&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;blueimp&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;helper&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;or&lt;/span&gt; &lt;span class=&#39;nb&#39;&gt;window&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;jQuery&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nb&#39;&gt;window&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;blueimp&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;Gallery&lt;/span&gt;
+&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt; &lt;span class=&#39;nf&#39;&gt;($, Gallery) -&amp;gt;&lt;/span&gt;
+  &lt;span class=&#39;s&#39;&gt;&amp;quot;use strict&amp;quot;&lt;/span&gt;
+
+  &lt;span class=&#39;nv&#39;&gt;handleSlide = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;Gallery&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;handleSlide&lt;/span&gt;
+
+  &lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;extend&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;Gallery&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;::&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;
+    &lt;span class=&#39;nv&#39;&gt;handleSlide: &lt;/span&gt;&lt;span class=&#39;nf&#39;&gt;(index) -&amp;gt;&lt;/span&gt;
+      &lt;span class=&#39;nx&#39;&gt;handleSlide&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;call&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;this&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;index&lt;/span&gt;
+
+      &lt;span class=&#39;k&#39;&gt;for&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;video&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;in&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;@playingVideos&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;or&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;[])&lt;/span&gt;
+        &lt;span class=&#39;nx&#39;&gt;video&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;pause&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;k&#39;&gt;if&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;video&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;?&lt;/span&gt;
+
+    &lt;span class=&#39;nv&#39;&gt;generateGuid: &lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nf&#39;&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class=&#39;nv&#39;&gt;s4 = &lt;/span&gt;&lt;span class=&#39;nf&#39;&gt;-&amp;gt;&lt;/span&gt;
+        &lt;span class=&#39;nb&#39;&gt;Math&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;floor&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;((&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nb&#39;&gt;Math&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;random&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;())&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;*&lt;/span&gt; &lt;span class=&#39;mh&#39;&gt;0x10000&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;toString&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;16&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;substring&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;
+      &lt;span class=&#39;nf&#39;&gt;-&amp;gt;&lt;/span&gt;
+        &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;-&amp;quot;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;-&amp;quot;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;-&amp;quot;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;-&amp;quot;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;+&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;s4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
+    &lt;span class=&#39;p&#39;&gt;)()&lt;/span&gt;
+
+    &lt;span class=&#39;nv&#39;&gt;buildTemplate: &lt;/span&gt;&lt;span class=&#39;nf&#39;&gt;(obj, wrapper_id, video_id) -&amp;gt;&lt;/span&gt;
+      &lt;span class=&#39;nv&#39;&gt;poster  = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;obj&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;data&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;poster&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+      &lt;span class=&#39;nv&#39;&gt;sources = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;obj&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;data&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;sources&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;reverse&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
+      &lt;span class=&#39;nv&#39;&gt;title   = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;obj&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;
+
+      &lt;span class=&#39;nv&#39;&gt;$wrapper_tag = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;&amp;lt;div&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;addClass&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;video-js-box video-content&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;title&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;    &lt;span class=&#39;nx&#39;&gt;wrapper_id&lt;/span&gt;
+
+      &lt;span class=&#39;nv&#39;&gt;$poster_tag = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;&amp;lt;img&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;addClass&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;toggle poster-video&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;src&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;poster&lt;/span&gt;
+
+      &lt;span class=&#39;nv&#39;&gt;$video_tag = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;&amp;lt;video&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;addClass&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;video-js vjs-default-skin&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;prop&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;controls&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;kc&#39;&gt;true&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;prop&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;autoplay&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;kc&#39;&gt;false&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;preload&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;  &lt;span class=&#39;s&#39;&gt;&amp;#39;auto&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;autobuffer&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;autobuffer&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;poster&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;   &lt;span class=&#39;nx&#39;&gt;poster&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;src&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;      &lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;obj&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;href&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;       &lt;span class=&#39;nx&#39;&gt;video_id&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;width&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;    &lt;span class=&#39;s&#39;&gt;&amp;#39;70%&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;height&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;   &lt;span class=&#39;s&#39;&gt;&amp;#39;85%&amp;#39;&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;css&lt;/span&gt;  &lt;span class=&#39;p&#39;&gt;{&lt;/span&gt; &lt;span class=&#39;nv&#39;&gt;display: &lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;none&amp;#39;&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;}&lt;/span&gt;
+
+      &lt;span class=&#39;nv&#39;&gt;$play_tag = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;&amp;lt;a&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;addClass&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;play-video&amp;#39;&lt;/span&gt;
+
+      &lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;each&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;sources&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nf&#39;&gt;(data) -&amp;gt;&lt;/span&gt;
+        &lt;span class=&#39;nv&#39;&gt;$source = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;&amp;lt;source&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+          &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;src&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;  &lt;span class=&#39;nx&#39;&gt;@&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;href&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;]&lt;/span&gt;
+          &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;attr&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;@&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;]&lt;/span&gt;
+
+        &lt;span class=&#39;nx&#39;&gt;$video_tag&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;append&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;$source&lt;/span&gt;
+
+      &lt;span class=&#39;nx&#39;&gt;$wrapper_tag&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;append&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;$poster_tag&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;append&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;$video_tag&lt;/span&gt;
+        &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;append&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;$play_tag&lt;/span&gt;
+
+      &lt;span class=&#39;nx&#39;&gt;$wrapper_tag&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;]&lt;/span&gt;
+
+    &lt;span class=&#39;nv&#39;&gt;videoFactory: &lt;/span&gt;&lt;span class=&#39;nf&#39;&gt;(obj, callback, videoInterface) -&amp;gt;&lt;/span&gt;
+      &lt;span class=&#39;nv&#39;&gt;wrapper_id = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;@generateGuid&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
+      &lt;span class=&#39;nv&#39;&gt;video_id   = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;@generateGuid&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
+
+      &lt;span class=&#39;nv&#39;&gt;$template = &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;@buildTemplate&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;obj&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;wrapper_id&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;video_id&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+
+      &lt;span class=&#39;nx&#39;&gt;@setTimeout&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;callback&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;[&lt;/span&gt;
+        &lt;span class=&#39;nv&#39;&gt;target: &lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;$template&lt;/span&gt;
+        &lt;span class=&#39;nv&#39;&gt;type: &lt;/span&gt;  &lt;span class=&#39;s&#39;&gt;&amp;#39;load&amp;#39;&lt;/span&gt;
+      &lt;span class=&#39;p&#39;&gt;]&lt;/span&gt;
+
+      &lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;nb&#39;&gt;document&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;).&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;on&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;click&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;&amp;quot;#&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;#{&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;wrapper_id&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;}&lt;/span&gt;&lt;span class=&#39;s&#39;&gt; .play-video&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;nf&#39;&gt;(e) =&amp;gt;&lt;/span&gt;
+        &lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;#&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;#{&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;wrapper_id&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;}&lt;/span&gt;&lt;span class=&#39;s&#39;&gt; .play-video, #&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;#{&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;wrapper_id&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;}&lt;/span&gt;&lt;span class=&#39;s&#39;&gt; .poster-video&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+          &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;css&lt;/span&gt; &lt;span class=&#39;nv&#39;&gt;display: &lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;none&amp;#39;&lt;/span&gt;
+
+        &lt;span class=&#39;nx&#39;&gt;$&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;#&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;#{&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;video_id&lt;/span&gt;&lt;span class=&#39;si&#39;&gt;}&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+          &lt;span class=&#39;p&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;css&lt;/span&gt; &lt;span class=&#39;nv&#39;&gt;display: &lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;block&amp;#39;&lt;/span&gt;
+
+        &lt;span class=&#39;nx&#39;&gt;@playingVideos&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;||=&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;[]&lt;/span&gt;
+        &lt;span class=&#39;nx&#39;&gt;@playingVideos&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[&lt;/span&gt;&lt;span class=&#39;nx&#39;&gt;@index&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;]&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;videojs&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;video_id&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;p&#39;&gt;{},&lt;/span&gt; &lt;span class=&#39;nf&#39;&gt;-&amp;gt;&lt;/span&gt;
+          &lt;span class=&#39;nx&#39;&gt;@play&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
+
+      &lt;span class=&#39;k&#39;&gt;return&lt;/span&gt; &lt;span class=&#39;nx&#39;&gt;$template&lt;/span&gt;
+
+  &lt;span class=&#39;nx&#39;&gt;Gallery&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5 id=&quot;stylesheets&quot;&gt;Stylesheets:&lt;/h5&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-sass&#39; data-lang=&#39;sass&#39;&gt;&lt;span class=&#39;k&#39;&gt;@import&lt;/span&gt; &lt;span class=&#39;s&#39;&gt;compass/css3/transform&lt;/span&gt;
+
+&lt;span class=&#39;nc&#39;&gt;.blueimp-gallery&lt;/span&gt;
+  &lt;span class=&#39;nc&#39;&gt;.video-js-box.video-content&lt;/span&gt;
+    &lt;span class=&#39;nd&#39;&gt;+transform-style&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;preserve-3d&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#39;nc&#39;&gt;.video-js.vjs-default-skin&lt;/span&gt;
+      &lt;span class=&#39;nd&#39;&gt;+translate&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;-50&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;-50&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+      &lt;span class=&#39;na&#39;&gt;position&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt; &lt;span class=&#39;no&#39;&gt;absolute&lt;/span&gt;
+      &lt;span class=&#39;na&#39;&gt;left&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;50&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;
+      &lt;span class=&#39;na&#39;&gt;top&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt;  &lt;span class=&#39;mi&#39;&gt;50&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;
+
+      &lt;span class=&#39;na&#39;&gt;max-width&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt;  &lt;span class=&#39;mi&#39;&gt;100&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;
+      &lt;span class=&#39;na&#39;&gt;max-height&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;100&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;
+
+      &lt;span class=&#39;nc&#39;&gt;.vjs-big-play-button&lt;/span&gt;
+        &lt;span class=&#39;na&#39;&gt;display&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt; &lt;span class=&#39;no&#39;&gt;none&lt;/span&gt;
+
+    &lt;span class=&#39;nc&#39;&gt;.video-js.vjs-fullscreen&lt;/span&gt;
+      &lt;span class=&#39;nd&#39;&gt;+translate&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+      &lt;span class=&#39;na&#39;&gt;left&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;
+      &lt;span class=&#39;na&#39;&gt;top&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;:&lt;/span&gt;  &lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;kt&#39;&gt;%&lt;/span&gt;
+
+
+  &lt;span class=&#39;k&#39;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;.slides&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;.slide&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;.video-content&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nt&#39;&gt;video&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;,&lt;/span&gt;
+  &lt;span class=&#39;k&#39;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;.slides&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;.slide&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nc&#39;&gt;.video-content&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#39;nt&#39;&gt;img&lt;/span&gt;
+    &lt;span class=&#39;nd&#39;&gt;+backface-visibility&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;no&#39;&gt;visible&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h5 id=&quot;sample_markup&quot;&gt;Sample markup:&lt;/h5&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;language-html&#39; data-lang=&#39;html&#39;&gt;&lt;span class=&#39;nt&#39;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;class=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;row&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#39;nt&#39;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;class=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;col-md-6&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#39;nt&#39;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;class=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;thumbnail&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;data-gallery=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;false&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;data-poster=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;/resource/video/large_frame/video_def.png&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;data-sources=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;[{&amp;amp;quot;href&amp;amp;quot;:&amp;amp;quot;/resource/video/webm/video_def.webm&amp;amp;quot;,&amp;amp;quot;type&amp;amp;quot;:&amp;amp;quot;video/webm&amp;amp;quot;},{&amp;amp;quot;href&amp;amp;quot;:&amp;amp;quot;/resource/video/mp4/video_def.mp4&amp;amp;quot;,&amp;amp;quot;type&amp;amp;quot;:&amp;amp;quot;video/mp4&amp;amp;quot;},{&amp;amp;quot;href&amp;amp;quot;:&amp;amp;quot;/resource/video/ogv/video_def.ogv&amp;amp;quot;,&amp;amp;quot;type&amp;amp;quot;:&amp;amp;quot;video/ogg&amp;amp;quot;}]&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;href=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;/resource/video/webm/video_def.webm&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;title=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;vamos&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;type=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;video/webm&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#39;nt&#39;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;alt=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;video def&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;src=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;/resource/video/thumb/video_def.png&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#39;nt&#39;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&#39;nt&#39;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&#39;nt&#39;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;class=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;col-md-6&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#39;nt&#39;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;class=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;thumbnail&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;data-gallery=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;false&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;data-poster=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;/resource/video/large_frame/video_spacetestsmall_512kb.png&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;data-sources=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;[{&amp;amp;quot;href&amp;amp;quot;:&amp;amp;quot;/resource/video/webm/video_spacetestsmall_512kb.webm&amp;amp;quot;,&amp;amp;quot;type&amp;amp;quot;:&amp;amp;quot;video/webm&amp;amp;quot;},{&amp;amp;quot;href&amp;amp;quot;:&amp;amp;quot;/resource/video/mp4/video_spacetestsmall_512kb.mp4&amp;amp;quot;,&amp;amp;quot;type&amp;amp;quot;:&amp;amp;quot;video/mp4&amp;amp;quot;},{&amp;amp;quot;href&amp;amp;quot;:&amp;amp;quot;/resource/video/ogv/video_spacetestsmall_512kb.ogv&amp;amp;quot;,&amp;amp;quot;type&amp;amp;quot;:&amp;amp;quot;video/ogg&amp;amp;quot;}]&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;href=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;/resource/video/webm/video_spacetestsmall_512kb.webm&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;title=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;Lorem ipsum...&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;type=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;video/webm&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#39;nt&#39;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;alt=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;Video spacetestsmall 512kb&amp;quot;&lt;/span&gt; &lt;span class=&#39;na&#39;&gt;src=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;quot;/resource/video/thumb/video_spacetestsmall_512kb.png&amp;quot;&lt;/span&gt;&lt;span class=&#39;nt&#39;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#39;nt&#39;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+  &lt;span class=&#39;nt&#39;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&#39;nt&#39;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+  </item>
+
+
 
   <item>
     <title>How to create a custom section for the RailsAdmin Engine</title>
