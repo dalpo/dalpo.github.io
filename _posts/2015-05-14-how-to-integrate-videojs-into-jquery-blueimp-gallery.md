@@ -139,7 +139,7 @@ You could extend the support to the HTML5 player VideoJS with this simply factor
 {% endhighlight %}
 
 
-##### Stylesheets:
+##### Stylesheets (Sass with Compass mixins):
 
 {% highlight sass %}
 @import compass/css3/transform
@@ -177,12 +177,23 @@ You could extend the support to the HTML5 player VideoJS with this simply factor
 {% highlight html %}
 <div class="row">
   <div class="col-md-6">
-    <a class="thumbnail" data-gallery="false" data-poster="/resource/video/large_frame/video_def.png" data-sources="[{&quot;href&quot;:&quot;/resource/video/webm/video_def.webm&quot;,&quot;type&quot;:&quot;video/webm&quot;},{&quot;href&quot;:&quot;/resource/video/mp4/video_def.mp4&quot;,&quot;type&quot;:&quot;video/mp4&quot;},{&quot;href&quot;:&quot;/resource/video/ogv/video_def.ogv&quot;,&quot;type&quot;:&quot;video/ogg&quot;}]" href="/resource/video/webm/video_def.webm" title="vamos" type="video/webm">
+    <a class="thumbnail"
+      data-gallery="false"
+      data-poster="/resource/video/large_frame/video_def.png"
+      data-sources="[{&quot;href&quot;:&quot;/resource/video/webm/video_def.webm&quot;,&quot;type&quot;:&quot;video/webm&quot;},{&quot;href&quot;:&quot;/resource/video/mp4/video_def.mp4&quot;,&quot;type&quot;:&quot;video/mp4&quot;},{&quot;href&quot;:&quot;/resource/video/ogv/video_def.ogv&quot;,&quot;type&quot;:&quot;video/ogg&quot;}]"
+      href="/resource/video/webm/video_def.webm"
+      title="Sample title" type="video/webm">
       <img alt="video def" src="/resource/video/thumb/video_def.png">
     </a>
   </div>
+
   <div class="col-md-6">
-    <a class="thumbnail" data-gallery="false" data-poster="/resource/video/large_frame/video_spacetestsmall_512kb.png" data-sources="[{&quot;href&quot;:&quot;/resource/video/webm/video_spacetestsmall_512kb.webm&quot;,&quot;type&quot;:&quot;video/webm&quot;},{&quot;href&quot;:&quot;/resource/video/mp4/video_spacetestsmall_512kb.mp4&quot;,&quot;type&quot;:&quot;video/mp4&quot;},{&quot;href&quot;:&quot;/resource/video/ogv/video_spacetestsmall_512kb.ogv&quot;,&quot;type&quot;:&quot;video/ogg&quot;}]" href="/resource/video/webm/video_spacetestsmall_512kb.webm" title="Lorem ipsum..." type="video/webm">
+    <a class="thumbnail"
+      data-gallery="false"
+      data-poster="/resource/video/large_frame/video_spacetestsmall_512kb.png"
+      data-sources="[{&quot;href&quot;:&quot;/resource/video/webm/video_spacetestsmall_512kb.webm&quot;,&quot;type&quot;:&quot;video/webm&quot;},{&quot;href&quot;:&quot;/resource/video/mp4/video_spacetestsmall_512kb.mp4&quot;,&quot;type&quot;:&quot;video/mp4&quot;},{&quot;href&quot;:&quot;/resource/video/ogv/video_spacetestsmall_512kb.ogv&quot;,&quot;type&quot;:&quot;video/ogg&quot;}]"
+      href="/resource/video/webm/video_spacetestsmall_512kb.webm"
+      title="Lorem ipsum..." type="video/webm">
       <img alt="Video spacetestsmall 512kb" src="/resource/video/thumb/video_spacetestsmall_512kb.png">
     </a>
   </div>
