@@ -22,105 +22,120 @@ You could extend the support to the HTML5 player VideoJS with this simply factor
 
 ##### Javascripts:
 
-{% highlight coffeescript %}
-((factory) ->
-  "use strict"
-  if typeof define is "function" and define.amd
+{% highlight javascript %}
+(function(factory) {
+  "use strict";
 
-    # Register as an anonymous AMD module:
-    define [ "./blueimp-helper", "./blueimp-gallery" ], factory
-  else
+  if (typeof define === "function" && define.amd) {
+    return define(["./blueimp-helper", "./blueimp-gallery"], factory);
+  } else {
+    return factory(window.blueimp.helper || window.jQuery, window.blueimp.Gallery);
+  }
+})(function($, Gallery) {
+  "use strict";
 
-    # Browser globals:
-    factory window.blueimp.helper or window.jQuery, window.blueimp.Gallery
-) ($, Gallery) ->
-  "use strict"
+  var handleSlide = Gallery.prototype.handleSlide;
 
-  handleSlide = Gallery::handleSlide
+  $.extend(Gallery.prototype, {
+    handleSlide: function(index) {
+      var i, len, ref, results, video;
+      handleSlide.call(this, index);
+      ref = this.playingVideos || [];
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        video = ref[i];
+        if (video != null) {
+          results.push(video.pause());
+        } else {
+          results.push(void 0);
+        }
+      }
+      return results;
+    },
 
-  $.extend Gallery::,
-    handleSlide: (index) ->
-      handleSlide.call this, index
+    generateGuid: (function() {
+      var s4 = function() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+      };
 
-      for video in (@playingVideos or [])
-        video.pause() if video?
+      return function() {
+        return s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4();
+      };
+    })(),
 
-    generateGuid: (->
-      s4 = ->
-        Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
-      ->
-        s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4()
-    )()
+    buildTemplate: function(obj, wrapper_id, video_id) {
+      var $play_tag, $poster_tag, $video_tag, $wrapper_tag, poster, sources, title;
 
-    buildTemplate: (obj, wrapper_id, video_id) ->
-      poster  = $(obj).data('poster')
-      sources = $(obj).data('sources').reverse()
-      title   = $(obj).attr 'title'
-
+      poster = $(obj).data('poster');
+      sources = $(obj).data('sources').reverse();
+      title = $(obj).attr('title');
       $wrapper_tag = $('<div>')
-        .addClass 'video-js-box video-content'
-        .attr 'title', title
-        .attr 'id',    wrapper_id
-
+        .addClass('video-js-box video-content')
+        .attr('title', title)
+        .attr('id', wrapper_id);
       $poster_tag = $('<img>')
-        .addClass 'toggle poster-video'
-        .attr 'src', poster
-
+        .addClass('toggle poster-video')
+        .attr('src', poster);
       $video_tag = $('<video>')
-        .addClass 'video-js vjs-default-skin'
-        .prop 'controls', true
-        .prop 'autoplay', false
-        .attr 'preload',  'auto'
-        .attr 'autobuffer', 'autobuffer'
-        .attr 'poster',   poster
-        .attr 'src',      $(obj).attr('href')
-        .attr 'id',       video_id
-        .attr 'width',    '70%'
-        .attr 'height',   '85%'
-        .css  { display:  'none' }
-
+        .addClass('video-js vjs-default-skin')
+        .prop('controls', true)
+        .prop('autoplay', false)
+        .attr('preload', 'auto')
+        .attr('autobuffer', 'autobuffer')
+        .attr('poster', poster)
+        .attr('src', $(obj).attr('href'))
+        .attr('id', video_id)
+        .attr('width', '70%')
+        .attr('height', '85%').css({
+          display: 'none'
+        });
       $play_tag = $('<a>')
-        .addClass 'play-video'
+        .addClass('play-video');
 
-      $.each sources, (data) ->
-        $source = $('<source>')
-          .attr 'src',  @['href']
-          .attr 'type', @['type']
+      $.each(sources, function(data) {
+        var $source;
+        $source = $('<source>').attr('src', this['href']).attr('type', this['type']);
+        return $video_tag.append($source);
+      });
 
-        $video_tag.append $source
+      $wrapper_tag.append($poster_tag).append($video_tag).append($play_tag);
 
-      $wrapper_tag
-        .append $poster_tag
-        .append $video_tag
-        .append $play_tag
+      return $wrapper_tag[0];
+    },
 
-      $wrapper_tag[0]
+    videoFactory: function(obj, callback, videoInterface) {
+      var $template, video_id, wrapper_id;
+      wrapper_id = this.generateGuid();
+      video_id = this.generateGuid();
+      $template = this.buildTemplate(obj, wrapper_id, video_id);
+      this.setTimeout(callback, [
+        {
+          target: $template,
+          type: 'load'
+        }
+      ]);
 
-    videoFactory: (obj, callback, videoInterface) ->
-      wrapper_id = @generateGuid()
-      video_id   = @generateGuid()
+      $(document).on("click", "#" + wrapper_id + " .play-video", (function(_this) {
+        return function(e) {
+          $("#" + wrapper_id + " .play-video, #" + wrapper_id + " .poster-video").css({
+            display: 'none'
+          });
+          $("#" + video_id).css({
+            display: 'block'
+          });
+          _this.playingVideos || (_this.playingVideos = []);
+          return _this.playingVideos[_this.index] = videojs(video_id, {}, function() {
+            return this.play();
+          });
+        };
+      })(this));
 
-      $template = @buildTemplate(obj, wrapper_id, video_id)
+      return $template;
+    }
+  });
 
-      @setTimeout callback, [
-        target: $template
-        type:   'load'
-      ]
-
-      $(document).on "click", "##{wrapper_id} .play-video", (e) =>
-        $("##{wrapper_id} .play-video, ##{wrapper_id} .poster-video")
-          .css display: 'none'
-
-        $("##{video_id}")
-          .css display: 'block'
-
-        @playingVideos ||= []
-        @playingVideos[@index] = videojs video_id, {}, ->
-          @play()
-
-      return $template
-
-  Gallery
+  return Gallery;
+});
 {% endhighlight %}
 
 
