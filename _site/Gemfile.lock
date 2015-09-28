@@ -158,8 +158,11 @@ DEPENDENCIES
   github-pages
   jekyll (~> 2.3)
   jekyll-assets
-  maruku
+  kramdown
   rake
   redcarpet
   sass (~> 3.2.19)
   uglifier
+
+BUNDLED WITH
+   1.10.6

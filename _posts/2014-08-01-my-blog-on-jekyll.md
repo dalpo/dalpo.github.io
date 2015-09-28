@@ -5,7 +5,7 @@ title: 'My first blog post on Jekyll!'
 subtitle: 'Welcome to my blog!'
 cover_image: blog-cover.jpg
 
-excerpt: "Welcome to my blog!"
+excerpt: "Hi I'am Andrea Dal Ponte, and this is my personal weblog"
 
 author:
   name: Andrea Dal Ponte
@@ -16,10 +16,8 @@ author:
 ---
 
 
-##### TL;DR
-Welcome to my blog!
+Hi I'am Andrea Dal Ponte, and this is my personal weblog.
 
----
+I will write about things that I build on web, using Ruby on Rails, EmberjS, ReactJS and many other exciting technologies.
 
-> Welcome to my WebLog!
-I choose Jekyll as blogging platform and this is my first post! :)
+P.S. If you enjoyed reading this, you could follow me on Twitter @dalpo.

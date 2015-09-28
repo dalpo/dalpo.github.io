@@ -7,7 +7,8 @@ gem 'rake'
 gem 'jekyll', '~> 2.3'
 gem 'jekyll-assets'
 
-gem 'maruku'
+# gem 'maruku'
+gem 'kramdown'
 gem 'redcarpet'
 
 gem 'compass'

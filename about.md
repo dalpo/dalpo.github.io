@@ -57,22 +57,35 @@ GNU/Linux Servers (usually Debian based), Chef, NGINX, Apache, Unicorn, Puma, Pa
 
 ### \_Work experience
 
+#### Digital Craftsman & Consultant
+
+##### **[Freelance](http://andreadalponte.com)** – May 2015 to Present
+
+Ruby on Rails and EmberJS developer, teacher and consultant.
+
+I develop and maintain custom applications for small and large enterprise companies with Agile methodologies.
+
+
 #### Full stack web developer
-##### **[PitchTarget - H-Farm](http://www.pitchtarget.com)** – January 2015 to Present
+
+##### **[PitchTarget - H-Farm](http://www.pitchtarget.com)** – January 2015 to May 2015
 
 Ember.js and Ruby on Rails developer
 
-#### Software Craftsmanship
+#### Señor software developer
+
 ##### **[Develon S.r.l.](http://www.develon.com)** – April 2012 to December 2014
 
 Full stack web developer handle all aspects the web applications creation process. Ruby On Rails, HTML5, CSS3, jQuery, Responsive and Mobile web applications develop.
 
 #### Software Consultant
+
 ##### **[Tactical People S.r.l.](http://www.tacticalpeople.it)** – October 2010 to April 2012 (1 year 7 months)
 
 Ruby on Rails and PHP consultant.
 
 #### Web Developer and SEO
+
 ##### **[Terralink S.r.l.](http://www.terralink.it)** – October 2007 to November 2010 (3 years 2 months)
 
 - Web applications and Content Management Systems (CMS) development with Ruby on Rails and CakePHP.
