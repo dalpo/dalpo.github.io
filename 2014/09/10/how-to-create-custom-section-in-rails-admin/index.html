@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to create a custom section for the RailsAdmin Engine &mdash; Andrea Dal Ponte</title>
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/logo.png"/>
+    <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Andrea Dal Ponte" />
+    <meta name="title" content="How to create a custom section for the RailsAdmin Engine ">
+    <link rel="canonical" href="http://andreadalponte.com/2014/09/10/how-to-create-custom-section-in-rails-admin/">
+    
+    <link rel="author" href="https://plus.google.com/100687498195339762535">
+    <meta property="og:title" content="How to create a custom section for the RailsAdmin Engine "/>
+    <meta property="og:url" content="http://andreadalponte.com/2014/09/10/how-to-create-custom-section-in-rails-admin/"/>
+    
+    <meta property="og:image" content="http://andreadalponte.com/images/ra-section-cover.jpg"/>
+    
+    <meta property="og:image" content="http://andreadalponte.com/images/logo.png"/>
+    
+    
+    <meta property="og:description" content="How to create a custom section to configure your reusable Rails Admin custom action"/>
+    <meta name="description" content="How to create a custom section to configure your reusable Rails Admin custom action"/>
+    
+    <meta property="og:site_name" content="Andrea Dal Ponte">
+  </head>
+  <body>
+
+  <section class="site-nav">
+    <header>
+      <nav id="navigation">
+        <a class="brand btn" href="/">Andrea Dal Ponte</a>
+        <a href="/" class="home">Weblog</a>
+        <a href="/about">About</a>
+        <a href="https://github.com/dalpo", target="_blank">Code</a>
+      </nav>
+      <nav class="tagline">
+        <span>Available as Ruby on Rails and EmberJS consultant</span>
+        <a href="mailto:info@andreadalponte.com" class="btn btn-outline">Hire me</a>
+      </nav>
+    </header>
+  </section>
+
+  
+<div class="article-cover">
+  <div>
+    <img src="/images/ra-section-cover.jpg" class="image">
+  </div>
+</div>
+
+<article>
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Andrea Dal Ponte" target="_blank">Andrea Dal Ponte</a></address> &mdash;
+        <time pubdate datetime="2014-10-September" title="September 10, 2014">September 10, 2014</time>
+      </div>
+      <h1 class="title">How to create a custom section for the RailsAdmin Engine</h1>
+      <h2 class="subtitle">In RailsAdmin a section is a configuration DSL for a custom action</h2>
+    </header>
+
+    <section>
+      <p>Sections describe different views in the RailsAdmin engine. Theese are very useful if you are writing a reusable custom action.</p>
+
+<p>Each section’s class object can store generic configuration about that section (such as the number of visible tabs in the main navigation), while the instances (accessed via model configuration objects) store model specific configuration (such as the visibility of the model).</p>
+
+<p>With the following lines you could easily write CustomAction configuration (aka Section):</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;rails_admin/config/sections/base&#39;</span>
+
+
+<span class="k">module</span> <span class="nn">RailsAdmin</span>
+  <span class="k">module</span> <span class="nn">Config</span>
+    <span class="k">module</span> <span class="nn">Sections</span>
+      <span class="c1"># Configuration of the clone action</span>
+      <span class="k">class</span> <span class="nc">SampleSection</span> <span class="o">&lt;</span> <span class="no">RailsAdmin</span><span class="o">::</span><span class="no">Config</span><span class="o">::</span><span class="no">Sections</span><span class="o">::</span><span class="no">Base</span>
+
+        <span class="n">register_instance_option</span> <span class="ss">:sample_conf</span> <span class="k">do</span>
+          <span class="kp">nil</span> <span class="c1"># set a default value here</span>
+        <span class="k">end</span>
+
+        <span class="n">register_instance_option</span> <span class="ss">:another_sample_conf</span> <span class="k">do</span>
+          <span class="kp">nil</span> <span class="c1"># set a default value here</span>
+        <span class="k">end</span>
+
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>So you can specify customize configurations in the rails_admin configuration initializer:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">RailsAdmin</span><span class="o">.</span><span class="n">config</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">model</span> <span class="s1">&#39;Team&#39;</span> <span class="k">do</span>
+    <span class="n">sample_section</span> <span class="k">do</span>
+      <span class="n">custom_method</span> <span class="ss">:some_value</span>
+
+      <span class="n">another_sample_conf</span> <span class="k">do</span>
+        <span class="n">bindings</span><span class="o">[</span><span class="ss">:object</span><span class="o">].</span><span class="n">do_something!</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>Every value of your Section could be retrieved with the model_config object in your custom action. For instance:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;rails_admin/config/actions&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rails_admin/config/actions/base&#39;</span>
+
+<span class="k">module</span> <span class="nn">RailsAdmin</span>
+  <span class="k">module</span> <span class="nn">Config</span>
+    <span class="k">module</span> <span class="nn">Actions</span>
+      <span class="k">class</span> <span class="nc">SampleCustomAction</span> <span class="o">&lt;</span> <span class="no">Base</span>
+        <span class="no">RailsAdmin</span><span class="o">::</span><span class="no">Config</span><span class="o">::</span><span class="no">Actions</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+
+        <span class="n">register_instance_option</span> <span class="ss">:controller</span> <span class="k">do</span>
+          <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+            <span class="c1"># retrieve configuration:</span>
+            <span class="n">model_config</span><span class="o">.</span><span class="n">sample_section</span><span class="o">.</span><span class="n">sample_conf</span>
+            <span class="n">model_config</span><span class="o">.</span><span class="n">sample_section</span><span class="o">.</span><span class="n">another_sample_conf</span>
+
+           <span class="c1"># do something...</span>
+
+            <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+              <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="vi">@action</span><span class="o">.</span><span class="n">template_name</span> <span class="p">}</span>
+              <span class="nb">format</span><span class="o">.</span><span class="n">js</span>   <span class="p">{</span> <span class="n">render</span> <span class="vi">@action</span><span class="o">.</span><span class="n">template_name</span><span class="p">,</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="p">}</span>
+            <span class="k">end</span>
+
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>Important note:</p>
+
+<p>When you define a custom section this must be initialized before rails_admin to work correctly. So in your Gemfile you must define rails_admin after your custom action gem.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;rails_admin_custom_action&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails_admin&#39;</span></code></pre></div>
+
+
+      
+<div class="social">
+    <div>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="How to create a custom section for the RailsAdmin Engine" data-related="dalpo">Tweet</a>
+    </div>
+    
+    
+    
+    <div>
+        <div class="g-plusone" data-size="medium"></div>
+    </div>
+    
+    
+    
+</div>
+
+    </section>
+
+    <footer>
+      <address>
+         <img src="/images/avatar.png">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/dalpo" title="" target="_blank">Andrea Dal Ponte</a></strong><br>
+        <span class="muted">Full stack web developer</span>
+        </p>
+      </address>
+
+    </footer>
+
+    
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2015
+
+      <nav>
+        <a href="http://andreadalponte.com/">Andrea Dal Ponte</a> &middot;
+        <a href="/">Weblog</a> &middot;
+        <a href="/about">About</a> &middot;
+        <a href="https://github.com/dalpo", target="_blank">Code</a>
+      </nav>
+
+      <nav class="social">
+        
+        <a href="https://twitter.com/dalpo" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+        
+        
+        <a href="http://facebook.com/andrea.dalponte" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+        
+        <a href="/feed.xml" title="RSS Feed">
+          <i class="icon icon-rss black"></i>
+        </a>
+      </nav>
+      <p>Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> &middot; Incorporated theme by <a href="https://sendtoinc.com" target="_blank">Inc</a></p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/assets/main.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-12925954-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+  </body>
+</html>
